@@ -1,6 +1,6 @@
 /**
  * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-etc
+ * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
  */
 
 import { stripIndent } from "common-tags";
@@ -146,7 +146,7 @@ ruleTester({ types: true }).run("no-assign-mutated-array", rule, {
     },
     {
       code: stripIndent`
-        // https://github.com/cartant/eslint-plugin-etc/issues/27
+        // https://github.com/icetee/eslint-plugin-etc/issues/27
         const a = new Array(10).fill(0);
         const b = Array(10).fill(0);
         const c = Array.from([0, 1, 2]).reverse();

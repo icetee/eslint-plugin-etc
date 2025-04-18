@@ -1,6 +1,6 @@
 /**
  * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-etc
+ * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
  * Portions of this file are copyright 2017 Klaus Meinhardt - see THIRD_PARTY_NOTICES.
  */
 /* eslint @typescript-eslint/no-non-null-assertion: "off" */

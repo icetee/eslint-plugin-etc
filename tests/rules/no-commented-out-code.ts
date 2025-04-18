@@ -1,6 +1,6 @@
 /**
  * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-etc
+ * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
  */
 
 import { stripIndent } from "common-tags";
@@ -81,7 +81,7 @@ ruleTester({ types: false }).run("no-commented-out-code", rule, {
     },
     {
       code: stripIndent`
-        // https://github.com/cartant/eslint-plugin-etc/issues/28
+        // https://github.com/icetee/eslint-plugin-etc/issues/28
         enum Data {
           // City
           Zero,
@@ -98,7 +98,7 @@ ruleTester({ types: false }).run("no-commented-out-code", rule, {
     },
     {
       code: stripIndent`
-        // https://github.com/cartant/eslint-plugin-etc/issues/32
+        // https://github.com/icetee/eslint-plugin-etc/issues/32
         interface MyExample {
           // City
           a: string;
@@ -119,7 +119,7 @@ ruleTester({ types: false }).run("no-commented-out-code", rule, {
     },
     {
       code: stripIndent`
-        // https://github.com/cartant/eslint-plugin-etc/issues/29
+        // https://github.com/icetee/eslint-plugin-etc/issues/29
         class SomeClass {
           // #region Some region
           someMethod() {}
@@ -129,7 +129,7 @@ ruleTester({ types: false }).run("no-commented-out-code", rule, {
     },
     {
       code: stripIndent`
-        // https://github.com/cartant/eslint-plugin-etc/issues/31
+        // https://github.com/icetee/eslint-plugin-etc/issues/31
         /* webpackChunkName: 'my_component' */
         /* webpackMode: true */
         /* webpackPreload: true */
@@ -138,7 +138,7 @@ ruleTester({ types: false }).run("no-commented-out-code", rule, {
     },
     {
       code: stripIndent`
-        // https://github.com/cartant/eslint-plugin-etc/issues/33
+        // https://github.com/icetee/eslint-plugin-etc/issues/33
         enum MyExample {
           // all-powerful
           Zero,

@@ -1,6 +1,6 @@
 /**
  * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-etc
+ * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
  * Portions of this file are copyright 2017 Klaus Meinhardt - see THIRD_PARTY_NOTICES.
  */
 
@@ -41,7 +41,7 @@ ruleTester({ types: true }).run("no-misused-generics", rule, {
     },
     // {
     //   code: stripIndent`
-    //     // https://github.com/cartant/eslint-plugin-etc/issues/15
+    //     // https://github.com/icetee/eslint-plugin-etc/issues/15
     //     /**
     //      * Call two functions with the same args, e.g.
     //      *
@@ -111,7 +111,7 @@ ruleTester({ types: true }).run("no-misused-generics", rule, {
     // parameter is used.
     //
     // fromFixture(stripIndent`
-    //   // https://github.com/cartant/eslint-plugin-etc/issues/30
+    //   // https://github.com/icetee/eslint-plugin-etc/issues/30
     //   const func = <T,>(param: T) => null;
     //                 ~ [canReplace { "name": "T", "replacement": "unknown" }]
     // `),
