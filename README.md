@@ -1,12 +1,8 @@
-# eslint-plugin-etc
+# @icetee/eslint-plugin-etc
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/icetee/eslint-plugin-etc/blob/master/LICENSE)
-[![NPM version](https://img.shields.io/npm/v/eslint-plugin-etc.svg)](https://www.npmjs.com/package/eslint-plugin-etc)
-[![Downloads](http://img.shields.io/npm/dm/eslint-plugin-etc.svg)](https://npmjs.org/package/eslint-plugin-etc)
-[![Build status](https://img.shields.io/circleci/build/github/icetee/eslint-plugin-etc?token=8ebc6af0847545d4c2346f5ffaedee508b55ce38)](https://app.circleci.com/pipelines/github/icetee)
-[![dependency status](https://img.shields.io/david/icetee/eslint-plugin-etc.svg)](https://david-dm.org/icetee/eslint-plugin-etc)
-[![devDependency Status](https://img.shields.io/david/dev/icetee/eslint-plugin-etc.svg)](https://david-dm.org/icetee/eslint-plugin-etc#info=devDependencies)
-[![peerDependency Status](https://img.shields.io/david/peer/icetee/eslint-plugin-etc.svg)](https://david-dm.org/icetee/eslint-plugin-etc#info=peerDependencies)
+[![NPM version](https://img.shields.io/npm/v/@icetee/eslint-plugin-etc.svg)](https://www.npmjs.com/package/@icetee/eslint-plugin-etc)
+[![Downloads](http://img.shields.io/npm/dm/@icetee/eslint-plugin-etc.svg)](https://npmjs.org/package/@icetee/eslint-plugin-etc)
 
 This package contains a bunch of general-purpose, TypeScript-related ESLint rules. Essentially, it's a re-implementation of the rules that are in the [`tslint-etc`](https://github.com/icetee/tslint-etc) package.
 
@@ -23,41 +19,52 @@ npm install @typescript-eslint/parser --save-dev
 Install the package using npm:
 
 ```
-npm install eslint-plugin-etc --save-dev
+npm install @icetee/eslint-plugin-etc --save-dev
 ```
 
-Configure the `parser` and the `parserOptions` for ESLint. Here, I use a `.eslintrc.js` file for the configuration:
+Configure the `parser` and the `parserOptions` for ESLint. Here, I use a `eslint.config.mjs` file for the configuration:
 
 ```js
-const { join } = require("path");
-module.exports = {
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    ecmaVersion: 2019,
-    project: join(__dirname, "./tsconfig.json"),
-    sourceType: "module"
-  },
-  plugins: ["etc"],
-  extends: [],
-  rules: {
-    "etc/no-t": "error"
-  }
-};
+import { defineConfig } from 'eslint/config'
+import etcPlugin from '@icetee/eslint-plugin-etc'
+
+export default defineConfig([
+    files: ['**/*.{js,mjs,cjs,ts}'],
+    languageOptions: {
+        parser: parserTs,
+        ecmaVersion: 2022,
+        sourceType: 'module',
+        parserOptions: {
+            project: ['./tsconfig.json'],
+            tsconfigRootDir: path.resolve(),
+            sourceType: 'module',
+        },
+    },
+    plugins: [
+        '@icetee/etc': etcPlugin,
+    ],
+])
 ```
 
 Or, using the `recommended` configuration:
 
 ```js
-const { join } = require("path");
-module.exports = {
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    ecmaVersion: 2019,
-    project: join(__dirname, "./tsconfig.json"),
-    sourceType: "module"
-  },
-  extends: ["plugin:etc/recommended"],
-};
+import { defineConfig } from 'eslint/config'
+
+export default defineConfig([
+    etc.configs.flatRecommended,
+    files: ['**/*.{js,mjs,cjs,ts}'],
+    languageOptions: {
+        parser: parserTs,
+        ecmaVersion: 2022,
+        sourceType: 'module',
+        parserOptions: {
+            project: ['./tsconfig.json'],
+            tsconfigRootDir: path.resolve(),
+            sourceType: 'module',
+        },
+    },
+])
 ```
 
 # Rules
