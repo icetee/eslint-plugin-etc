@@ -3,9 +3,12 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "lib": ["ES2022"],
+    "strict": true,
     "skipLibCheck": true,
   },
   "include": ["modules/*.ts"],
-  "files": ["file.tsx"]
+    "files": ["file.tsx"]
 }

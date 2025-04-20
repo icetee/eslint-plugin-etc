@@ -29,7 +29,7 @@ import { defineConfig } from 'eslint/config'
 import etcPlugin from '@icetee/eslint-plugin-etc'
 
 export default defineConfig([
-    files: ['**/*.{js,mjs,cjs,ts}'],
+    files: ['**/*.{js,mjs,ts}'],
     languageOptions: {
         parser: parserTs,
         ecmaVersion: 2022,
@@ -53,7 +53,7 @@ import { defineConfig } from 'eslint/config'
 
 export default defineConfig([
     etc.configs.flatRecommended,
-    files: ['**/*.{js,mjs,cjs,ts}'],
+    files: ['**/*.{js,mjs,ts}'],
     languageOptions: {
         parser: parserTs,
         ecmaVersion: 2022,

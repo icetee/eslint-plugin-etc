@@ -1,5 +1,21 @@
-import { tsquery } from "@phenomnomnominal/tsquery";
 import ts from "typescript";
+
+const kinds = new Set<ts.SyntaxKind>([
+  ts.SyntaxKind.ClassDeclaration,
+  ts.SyntaxKind.Constructor,
+  ts.SyntaxKind.EnumDeclaration,
+  ts.SyntaxKind.EnumMember,
+  ts.SyntaxKind.FunctionDeclaration,
+  ts.SyntaxKind.GetAccessor,
+  ts.SyntaxKind.InterfaceDeclaration,
+  ts.SyntaxKind.MethodDeclaration,
+  ts.SyntaxKind.MethodSignature,
+  ts.SyntaxKind.PropertyDeclaration,
+  ts.SyntaxKind.PropertySignature,
+  ts.SyntaxKind.SetAccessor,
+  ts.SyntaxKind.TypeAliasDeclaration,
+  ts.SyntaxKind.VariableDeclaration,
+]);
 
 export function findTaggedNames(
   tagName: string,
@@ -10,10 +26,9 @@ export function findTaggedNames(
     if (sourceFile.text.indexOf(`@${tagName}`) === -1) {
       return;
     }
-    const nodes = tsquery(
-      sourceFile,
-      `ClassDeclaration, Constructor, EnumDeclaration, EnumMember, FunctionDeclaration, GetAccessor, InterfaceDeclaration, MethodDeclaration, MethodSignature, PropertyDeclaration, PropertySignature, SetAccessor, TypeAliasDeclaration, VariableDeclaration`
-    );
+
+    const nodes = getNodes(sourceFile);
+
     nodes.forEach((node) => {
       const tags = ts.getJSDocTags(node);
       if (!tags.some((tag) => tag.tagName.text === tagName)) {
@@ -33,5 +48,24 @@ export function findTaggedNames(
       }
     });
   });
+
   return taggedNames;
+}
+
+function getNodes(node: ts.Node): ts.Node[] {
+  const matchingNodes: ts.Node[] = [];
+
+  collectMatchingNodes(node)
+
+  return matchingNodes
+}
+
+function collectMatchingNodes(node: ts.Node): void {
+  const matchingNodes: ts.Node[] = [];
+
+  if (kinds.has(node.kind)) {
+    matchingNodes.push(node);
+  }
+
+  ts.forEachChild(node, collectMatchingNodes);
 }
