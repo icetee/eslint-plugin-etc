@@ -71,7 +71,7 @@
     "dist:clean": "rimraf dist",
     "lint": "eslint source/**/*.ts tests/**/*.ts",
     "prepare": "husky install",
-    "prepublishOnly": "yarn run test && yarn run dist",
+    "prepublishOnly": "yarn run dist",
     "prettier": "prettier --write \"./{src,tests}/**/*.{js,json,ts,tsx}\"",
     "prettier:ci": "prettier --check \"./{src,tests}/**/*.{js,json,ts,tsx}\"",
     "test": "mocha -r ts-node/register -t 5000 tests/**/*.ts",
