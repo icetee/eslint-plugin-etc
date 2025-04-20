@@ -1,14 +1,13 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- */
+import { Linter } from "eslint"
 
-export = {
-  plugins: ["etc"],
-  rules: {
-    "etc/no-assign-mutated-array": "error",
-    "etc/no-deprecated": "warn",
-    "etc/no-implicit-any-catch": "error",
-    "etc/no-internal": "error",
-  },
-};
+export const rules: Partial<Linter.RulesRecord> = {
+  '@icetee/etc/no-assign-mutated-array': 'error',
+  '@icetee/etc/no-deprecated': 'error',
+  '@icetee/etc/no-implicit-any-catch': 'error',
+  '@icetee/etc/no-internal': 'error',
+}
+
+export default {
+  extends: ["./configs/base"],
+  rules,
+}

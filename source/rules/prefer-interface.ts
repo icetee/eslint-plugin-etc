@@ -1,12 +1,7 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- */
-
 import {
   TSESLint as eslint,
   TSESTree as es,
-} from "@typescript-eslint/experimental-utils";
+} from "@typescript-eslint/utils";
 import {
   getParent,
   getParserServices,
@@ -15,20 +10,19 @@ import {
   isIdentifier,
   isTSTypeLiteral,
   isTSTypeReference,
-} from "eslint-etc";
-import { ruleCreator } from "../utils";
+} from "@icetee/eslint-etc";
+import { createRule } from "../utils.js";
 
-const defaultOptions: readonly {
-  allowIntersection?: boolean;
-  allowLocal?: boolean;
-}[] = [];
+type OptionItem = { allowIntersection?: boolean, allowLocal?: boolean };
+type Options = readonly OptionItem[];
 
-const rule = ruleCreator({
+const defaultOptions: Options = [];
+
+const rule = createRule({
   defaultOptions: defaultOptions,
   meta: {
     docs: {
       description: "Forbids type aliases where interfaces can be used.",
-      recommended: false,
     },
     fixable: "code",
     hasSuggestions: true,
@@ -69,7 +63,8 @@ const rule = ruleCreator({
           if (!isIdentifier(typeReference.typeName)) {
             throw new Error("Expected typeName to be an identifier.");
           }
-          const parameters = formatTypeParameters(typeReference.typeParameters);
+          const parameters = formatTypeParameters(typeReference.typeArguments ?? undefined);
+
           return `${typeReference.typeName.name}${parameters}`;
         })
         .join(", ");
@@ -237,4 +232,4 @@ const rule = ruleCreator({
   },
 });
 
-export = rule;
+export default rule;

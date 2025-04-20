@@ -1,18 +1,27 @@
 {
   "compilerOptions": {
-    "declaration": false,
-    "importHelpers": true,
-    "lib": ["esnext"],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noEmitHelpers": true,
-    "outDir": "build",
-    "removeComments": true,
-    "skipLibCheck": true,
-    "sourceMap": false,
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    "lib": ["ES2022"],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "target": "es2018"
+    "skipLibCheck": true,
+    "noUncheckedIndexedAccess": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+
+    "noEmit": false,
+    "outDir": "build",
+    "declaration": true,
+    "declarationMap": true,
+    "removeComments": true,
+
+    "tsBuildInfoFile": ".tsbuildinfo"
   },
-  "exclude": [],
-  "include": ["source/**/*.ts", "tests/**/*.ts"]
+  "include": ["source/**/*.ts", "tests/**/*.ts"],
+  "exclude": ["node_modules", "build", "**/*.test.ts"]
 }

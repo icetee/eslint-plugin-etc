@@ -1,21 +1,15 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- */
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { findParent, getParserServices, isIdentifier } from "@icetee/eslint-etc";
+import ts from "typescript";
+import { getTagsFromDeclaration } from "../tslint-tag.js";
+import { createRule } from "../utils.js";
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { findParent, getParserServices, isIdentifier } from "eslint-etc";
-import * as ts from "typescript";
-import { getTagsFromDeclaration } from "../tslint-tag";
-import { ruleCreator } from "../utils";
-
-const rule = ruleCreator({
+const rule = createRule({
   defaultOptions: [],
   meta: {
     docs: {
       description:
         "Forbids internal APIs that are not prefixed with underscores.",
-      recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -104,4 +98,4 @@ const rule = ruleCreator({
   },
 });
 
-export = rule;
+export default rule;

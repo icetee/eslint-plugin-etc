@@ -1,17 +1,12 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- */
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { createRule } from "../utils.js";
+import { parse } from '@typescript-eslint/parser';
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { ruleCreator } from "../utils";
-
-const rule = ruleCreator({
+const rule = createRule({
   defaultOptions: [],
   meta: {
     docs: {
       description: "Forbids commented-out code.",
-      recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -23,12 +18,12 @@ const rule = ruleCreator({
   },
   name: "no-commented-out-code",
   create: (context) => {
-    const { parse } = require(context.parserPath);
     const { project, ...parserOptions } = context.parserOptions;
-    const sourceCode = context.getSourceCode();
+    const { sourceCode } = context;
+
     return {
       Program: () => {
-        const comments = context.getSourceCode().getAllComments();
+        const comments = context.sourceCode.getAllComments();
         const blocks = toBlocks(comments);
         for (const block of blocks) {
           const { content, loc } = block;
@@ -96,7 +91,7 @@ function hasLabeledStatementBody(program: es.Program) {
   return (
     program.type === "Program" &&
     program.body.length === 1 &&
-    program.body[0].type === "LabeledStatement"
+    program.body[0]?.type === "LabeledStatement"
   );
 }
 
@@ -135,7 +130,8 @@ function toBlocks(comments: es.Comment[]) {
       prevLine = undefined;
     } else if (comment.type === "Line") {
       if (prevLine && prevLine.loc.start.line === comment.loc.start.line - 1) {
-        const prevBlock = blocks[blocks.length - 1];
+        const prevBlock = blocks[blocks.length - 1] || { content: '', loc: { start: 0, end: 0 }};
+
         prevBlock.content += `\n${comment.value}`;
         prevBlock.loc.end = comment.loc.end;
       } else {
@@ -144,9 +140,11 @@ function toBlocks(comments: es.Comment[]) {
           loc: { ...comment.loc },
         });
       }
+
       prevLine = comment;
     }
   }
+
   return blocks;
 }
 
@@ -176,4 +174,4 @@ function wrapContent(
   }
 }
 
-export = rule;
+export default rule;

@@ -1,21 +1,16 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- */
-
 import {
   AST_NODE_TYPES,
   TSESLint as eslint,
   TSESTree as es,
-} from "@typescript-eslint/experimental-utils";
+} from "@typescript-eslint/utils";
 import {
   getTypeServices,
   hasTypeAnnotation,
   isArrowFunctionExpression,
   isFunctionExpression,
   isMemberExpression,
-} from "eslint-etc";
-import { ruleCreator } from "../utils";
+} from "@icetee/eslint-etc";
+import { createRule } from "../utils.js";
 
 function isParenthesised(
   sourceCode: Readonly<eslint.SourceCode>,
@@ -33,18 +28,17 @@ function isParenthesised(
   );
 }
 
-const defaultOptions: readonly {
-  allowExplicitAny?: boolean;
-}[] = [];
+type OptionItem = { allowExplicitAny?: boolean };
+type Options = readonly OptionItem[];
 
-const rule = ruleCreator({
+const defaultOptions: Options = [];
+
+const rule = createRule({
   defaultOptions,
   meta: {
     docs: {
       description:
         "Forbids implicit `any` error parameters in promise rejections.",
-      recommended: false,
-      suggestion: true,
     },
     fixable: "code",
     hasSuggestions: true,
@@ -89,6 +83,7 @@ const rule = ruleCreator({
       if (!param) {
         return;
       }
+
       if (hasTypeAnnotation(param)) {
         const { typeAnnotation } = param;
         const {
@@ -138,11 +133,15 @@ const rule = ruleCreator({
           return;
         }
         function fix(fixer: eslint.RuleFixer) {
+          // @ts-ignore
           if (isParenthesised(sourceCode, param)) {
+            // @ts-ignore
             return fixer.insertTextAfter(param, ": unknown");
           }
           return [
+            // @ts-ignore
             fixer.insertTextBefore(param, "("),
+            // @ts-ignore
             fixer.insertTextAfter(param, ": unknown)"),
           ];
         }
@@ -189,4 +188,4 @@ const rule = ruleCreator({
   },
 });
 
-export = rule;
+export default rule;

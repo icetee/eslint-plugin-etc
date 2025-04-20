@@ -1,12 +1,7 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- */
-
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/throw-error");
-import { ruleTester } from "../utils";
+import { fromFixture } from "@icetee/eslint-etc";
+import rule from '../../source/rules/throw-error.js';
+import { ruleTester } from "../utils.js";
 
 ruleTester({ types: true }).run("throw-error", rule, {
   valid: [

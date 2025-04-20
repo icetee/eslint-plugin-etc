@@ -1,13 +1,7 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- * Portions of this file are copyright 2017 Klaus Meinhardt - see THIRD_PARTY_NOTICES.
- */
-
 import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-misused-generics");
-import { ruleTester } from "../utils";
+import { fromFixture } from "@icetee/eslint-etc";
+import rule from '../../source/rules/no-misused-generics.js';
+import { ruleTester } from "../utils.js";
 
 ruleTester({ types: true }).run("no-misused-generics", rule, {
   valid: [

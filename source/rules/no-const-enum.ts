@@ -1,24 +1,19 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- */
-
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { getLoc, getParserServices } from "eslint-etc";
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getLoc, getParserServices } from "@icetee/eslint-etc";
 import * as tsutils from "tsutils";
-import * as ts from "typescript";
-import { ruleCreator } from "../utils";
+import ts from "typescript";
+import { createRule } from "../utils.js";
 
-const defaultOptions: readonly {
-  allowLocal?: boolean;
-}[] = [];
+type OptionItem = { allowLocal?: boolean };
+type Options = readonly OptionItem[];
 
-const rule = ruleCreator({
+const defaultOptions: Options = [];
+
+const rule = createRule({
   defaultOptions,
   meta: {
     docs: {
       description: "Forbids the use of `const enum`.",
-      recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -43,10 +38,15 @@ const rule = ruleCreator({
       const enumDeclaration = esTreeNodeToTSNodeMap.get(
         node
       ) as ts.EnumDeclaration;
+      const rawModifiers = enumDeclaration.modifiers ?? ts.factory.createNodeArray();
+      const modifiers = ts.factory.createNodeArray(
+        rawModifiers.filter((m): m is ts.Modifier => ts.isModifier(m))
+      );
+
       if (
         allowLocal &&
         !tsutils.hasModifier(
-          enumDeclaration.modifiers,
+          modifiers,
           ts.SyntaxKind.ExportKeyword
         )
       ) {
@@ -54,7 +54,7 @@ const rule = ruleCreator({
       }
       if (
         !tsutils.hasModifier(
-          enumDeclaration.modifiers,
+          modifiers,
           ts.SyntaxKind.ConstKeyword
         )
       ) {
@@ -68,4 +68,4 @@ const rule = ruleCreator({
   }),
 });
 
-export = rule;
+export default rule;

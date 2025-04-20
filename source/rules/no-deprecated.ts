@@ -1,27 +1,22 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- */
-
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { getParent, getParserServices } from "eslint-etc";
-import * as ts from "typescript";
-import { findTaggedNames } from "../tag";
-import { getTags, isDeclaration } from "../tslint-tag";
-import { ruleCreator } from "../utils";
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getParent, getParserServices } from "@icetee/eslint-etc";
+import ts from "typescript";
+import { findTaggedNames } from "../tag.js";
+import { getTags, isDeclaration } from "../tslint-tag.js";
+import { createRule } from "../utils.js";
 
 const deprecatedNamesByProgram = new WeakMap<ts.Program, Set<string>>();
 
-const defaultOptions: readonly {
-  ignored?: Record<string, string>;
-}[] = [];
+type OptionItem = { ignored?: Record<string, string> };
+type Options = readonly OptionItem[];
 
-const rule = ruleCreator({
+const defaultOptions: Options = [];
+
+const rule = createRule({
   defaultOptions,
   meta: {
     docs: {
       description: "Forbids the use of deprecated APIs.",
-      recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -108,4 +103,4 @@ const rule = ruleCreator({
   },
 });
 
-export = rule;
+export default rule;

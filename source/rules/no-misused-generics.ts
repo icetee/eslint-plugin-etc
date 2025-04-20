@@ -1,23 +1,15 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- * Portions of this file are copyright 2017 Klaus Meinhardt - see THIRD_PARTY_NOTICES.
- */
-/* eslint @typescript-eslint/no-non-null-assertion: "off" */
-
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { getLoc, getParserServices } from "eslint-etc";
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getLoc, getParserServices } from "@icetee/eslint-etc";
 import * as tsutils from "tsutils";
-import * as ts from "typescript";
-import { ruleCreator } from "../utils";
+import ts from "typescript";
+import { createRule } from "../utils.js";
 
-const rule = ruleCreator({
+const rule = createRule({
   defaultOptions: [],
   meta: {
     docs: {
       description:
         "Forbids type parameters without inference sites and type parameters that don't add type safety to declarations.",
-      recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -153,4 +145,4 @@ const rule = ruleCreator({
   },
 });
 
-export = rule;
+export default rule;

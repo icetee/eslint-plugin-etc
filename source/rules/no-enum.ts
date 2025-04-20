@@ -1,19 +1,13 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- */
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getLoc, getParserServices } from "@icetee/eslint-etc";
+import ts from "typescript";
+import { createRule } from "../utils.js";
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { getLoc, getParserServices } from "eslint-etc";
-import * as ts from "typescript";
-import { ruleCreator } from "../utils";
-
-const rule = ruleCreator({
+const rule = createRule({
   defaultOptions: [],
   meta: {
     docs: {
       description: "Forbids the use of `enum`.",
-      recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -38,4 +32,4 @@ const rule = ruleCreator({
   }),
 });
 
-export = rule;
+export default rule;

@@ -1,20 +1,14 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- */
-
 import {
   TSESLint as eslint,
   TSESTree as es,
-} from "@typescript-eslint/experimental-utils";
-import { ruleCreator } from "../utils";
+} from "@typescript-eslint/utils";
+import { createRule } from "../utils.js";
 
-const rule = ruleCreator({
+const rule = createRule({
   defaultOptions: [],
   meta: {
     docs: {
       description: "Forbids greater-than comparisons.",
-      recommended: false,
     },
     fixable: "code",
     hasSuggestions: true,
@@ -62,4 +56,4 @@ const rule = ruleCreator({
   },
 });
 
-export = rule;
+export default rule;

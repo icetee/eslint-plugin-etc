@@ -1,18 +1,12 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- */
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getParent, getTypeServices, isCallExpression } from "@icetee/eslint-etc";
+import { createRule } from "../utils.js";
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { getParent, getTypeServices, isCallExpression } from "eslint-etc";
-import { ruleCreator } from "../utils";
-
-const rule = ruleCreator({
+const rule = createRule({
   defaultOptions: [],
   meta: {
     docs: {
       description: "Forbids throwing - or rejecting with - non-`Error` values.",
-      recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -31,6 +25,11 @@ const rule = ruleCreator({
       const {
         arguments: [arg],
       } = node;
+
+      if (arg === undefined) {
+        return
+      }
+
       if (!isAny(arg) && !isUnknown(arg) && !couldBeType(arg, "Error")) {
         context.report({
           data: { usage: "Rejecting with" },
@@ -87,4 +86,4 @@ const rule = ruleCreator({
   },
 });
 
-export = rule;
+export default rule;

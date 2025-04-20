@@ -16,7 +16,7 @@
  */
 
 import * as tsutils from "tsutils";
-import * as ts from "typescript";
+import ts from "typescript";
 
 export function isDeclaration(identifier: ts.Identifier): boolean {
   const parent = identifier.parent;
@@ -223,7 +223,7 @@ function isFunctionOrMethod(declarations?: ts.Declaration[]) {
   if (declarations === undefined || declarations.length === 0) {
     return false;
   }
-  switch (declarations[0].kind) {
+  switch (declarations[0]?.kind) {
     case ts.SyntaxKind.MethodDeclaration:
     case ts.SyntaxKind.FunctionDeclaration:
     case ts.SyntaxKind.FunctionExpression:

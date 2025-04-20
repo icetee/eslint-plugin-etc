@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
-
 // Not internal
 
 export interface NotInternalInterface {

@@ -1,10 +1,5 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- */
-
 import { tsquery } from "@phenomnomnominal/tsquery";
-import * as ts from "typescript";
+import ts from "typescript";
 
 export function findTaggedNames(
   tagName: string,

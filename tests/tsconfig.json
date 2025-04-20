@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["esnext"],
-    "jsx": "react",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
     "skipLibCheck": true,
-    "target": "esnext"
   },
   "include": ["modules/*.ts"],
   "files": ["file.tsx"]

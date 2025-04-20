@@ -1,22 +1,17 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- */
+import { TSESTree as es } from "@typescript-eslint/utils";
+import { getTypeServices, isMemberExpression } from "@icetee/eslint-etc";
+import { createRule } from "../utils.js";
 
-import { TSESTree as es } from "@typescript-eslint/experimental-utils";
-import { getTypeServices, isMemberExpression } from "eslint-etc";
-import { ruleCreator } from "../utils";
+type OptionItem = { types?: string[] };
+type Options = readonly OptionItem[];
 
-const defaultOptions: readonly {
-  types?: string[];
-}[] = [];
+const defaultOptions: Options = [];
 
-const rule = ruleCreator({
+const rule = createRule({
   defaultOptions,
   meta: {
     docs: {
       description: "Forbids calling `forEach`.",
-      recommended: false,
     },
     fixable: undefined,
     hasSuggestions: false,
@@ -64,4 +59,4 @@ const rule = ruleCreator({
   },
 });
 
-export = rule;
+export default rule;

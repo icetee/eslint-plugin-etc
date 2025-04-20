@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
-
 // Not deprecated
 
 export interface NotDeprecatedInterface {

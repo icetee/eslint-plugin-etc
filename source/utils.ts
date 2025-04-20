@@ -1,11 +1,6 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/icetee/eslint-plugin-etc
- */
+import { ESLintUtils } from '@typescript-eslint/utils'
 
-import { ESLintUtils } from "@typescript-eslint/experimental-utils";
-
-export const ruleCreator = ESLintUtils.RuleCreator(
+export const createRule = ESLintUtils.RuleCreator(
   (name) =>
     `https://github.com/icetee/eslint-plugin-etc/tree/main/docs/rules/${name}.md`
-);
+)
